@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: amf
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: amf
+
+  template:
+    metadata:
+      labels:
+        app: amf
+
+    spec:
+      serviceAccountName: amf-sa
+
+      containers:
+      - name: amf
+
+        image: nginx
+
+        ports:
+        - containerPort: 80
+
+        env:
+        - name: MCC
+          valueFrom:
+            configMapKeyRef:
+              name: amf-config
+              key: MCC
+
+        - name: NRF_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: amf-secret
+              key: NRF_USERNAME
