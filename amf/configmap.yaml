@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: amf-config
+
+data:
+  MCC: "440"
+  MNC: "10"
+  TAC: "1001"
+  NRF_URI: "http://nrf-service:8000"
